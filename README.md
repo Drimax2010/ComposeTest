@@ -1,4 +1,4 @@
-# Comopose Test
+# Compose Test
 
 Project to learn and test Docker Compose using Node Mongo and Angular
 
