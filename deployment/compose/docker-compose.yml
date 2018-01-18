@@ -2,20 +2,22 @@ version: '2.1'
 
 services:
   compositetestserver:
-    image: danieltu/composeserver
+    build: ../../CompositeTestServer/
     environment:
       NODE_ENV: production
     ports:
       - 3100:3100
+    depends_on:  
+      - composite-test-db
   composite-test-db:
     image: mongo
     ports:
      - 27017:27017
   mongo-seed:
-    image: danieltu/mongoseed
-    links:
+    build: ../../scripts/
+    depends_on:
       - composite-test-db
   web-view:
-    image: danieltu/composetestview
+    build: ../../CompositeTestWebView/
     ports:
-      - 8080:80     
+      - 8080:80 
