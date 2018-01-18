@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-# ComposeTest
-=======
+
 # Compose Test
 
 Project to learn and test Docker Compose using Node Mongo and Angular
@@ -41,5 +39,3 @@ docker-compose up
 http://localhost:8080/
 ```
 
-
->>>>>>> refs/remotes/origin/master
