@@ -11,8 +11,8 @@ mongoClient.connect(url, function(err, database) {
     return console.dir(err);
   }
   global.db = database.db("ComposeTest");
-  var chatRoom = this.db.collection("Device");
-  chatRoom.count(function(err, count) {
+  var device = this.db.collection("Device");
+  device.count(function(err, count) {
     console.log("registros actuales: "+count)
     /*
     if (count <= 0) {
