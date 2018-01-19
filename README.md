@@ -23,14 +23,20 @@ Run project
 Just need docker
 ```
 Docker: https://docs.docker.com/engine/installation/
+Docker-Compose: https://docs.docker.com/compose/install/#install-compose
 ```
 
 
 ## Running the tests
 
 -Download the project
-- go to deployments/compose
-- execute the command 
+- go to ComoposeTest/CompositeTestWebView
+- execute the command to resolve all dependencies 
+```
+npm install
+```
+- go to ComoposeTest/dployment/compose
+- execute the command to execute the project
 ```
 docker-compose up
 ```
