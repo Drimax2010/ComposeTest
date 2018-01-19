@@ -1,0 +1,7 @@
+<app-device  style="width: 90%;" (selectedDevice)="onSelectedDevice($event)" *ngFor="let device of deviceList" [device]="device" >
+    <mat-icon>done</mat-icon>
+</app-device>
+
+<div style="height: 20px"></div>
+
+<app-device-detail *ngIf="selectedDevice" [device]="selectedDevice"></app-device-detail>
