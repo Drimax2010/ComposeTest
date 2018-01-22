@@ -1,0 +1,8 @@
+<a [routerLink]="['/device', device._id]">
+  <mat-card class="example-card" style="width: 100%"  appEventHover hoverColor="#CFCFCF" >
+    <mat-card-content>
+      <ng-content></ng-content>
+     {{device.name}}
+    </mat-card-content>
+  </mat-card>
+</a>

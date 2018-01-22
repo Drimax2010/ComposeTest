@@ -1,7 +1,30 @@
-<app-device  style="width: 90%;" (selectedDevice)="onSelectedDevice($event)" *ngFor="let device of deviceList" [device]="device" >
-    <mat-icon>done</mat-icon>
-</app-device>
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
 
-<div style="height: 20px"></div>
 
-<app-device-detail *ngIf="selectedDevice" [device]="selectedDevice"></app-device-detail>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{device._id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{device.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{device.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="desc">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{device.desc}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectedRow(row)" appEventHover hoverColor="#CFCFCF"></mat-row>
+  </mat-table>
+</div>

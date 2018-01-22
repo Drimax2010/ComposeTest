@@ -1,6 +1,6 @@
-{ "name" : "OMVZ7", "type" : "TYPE", "desc" : "Type desc" }
-{ "name" : "OMVZ8", "type" : "TYPE", "desc" : "Other sample" }
-{ "name" : "OMVZ6", "type" : "MRA", "desc" : "Another sample" }
-{ "name" : "OMVZ6", "type" : "MRA", "desc" : "Another sample" }
-{ "name" : "OMVZ8", "type" : "TYPE", "desc" : "Other sample" }
-{ "name" : "OMVZ7", "type" : "TYPE", "desc" : "Type desc" }
+{ "name" : "OMVZ7", "type" : "TYPE", "desc" : "Type desc", "capType" : "AUTOMATIC_SYSTEM",  "brokerurl" : "sample-url.com", "image" : "https://noticias.caracoltv.com/sites/default/files/250116_tarjeta-civica.jpg"}
+{ "name" : "OMVZ8", "type" : "TYPE", "desc" : "Other sample", "capType" : "MOD_INTERFAZ", "brokerurl" : "sample-url.com", "image" : "http://www.elmundo.com/images/ediciones/Domingo_26_7_2015/Domingo_26_7_2015@@gtranvia.jpg" }
+{ "name" : "OMVZ6", "type" : "MRA", "desc" : "Another sample", "capType" : "ELTRA", "brokerurl" : "sample-url.com", "image" : "https://www.metrodemedellin.gov.co/Portals/1/EasyDNNnews/206/Cambio-validadores-530x300.jpg" }
+{ "name" : "OMVZ6", "type" : "MRA", "desc" : "Another sample", "capType" : "NA", "brokerurl" : "sample-url.com", "image" : "https://www.metrodemedellin.gov.co/Portals/1/EasyDNNnews/206/Cambio-validadores-530x300.jpg" }
+{ "name" : "OMVZ8", "type" : "TYPE", "desc" : "Other sample", "capType" : "AUTOMATIC_SYSTEM", "brokerurl" : "sample-url.com", "image" : "http://www.elmundo.com/images/ediciones/Domingo_26_7_2015/Domingo_26_7_2015@@gtranvia.jpg" }
+{ "name" : "OMVZ7", "type" : "TYPE", "desc" : "Type desc", "capType" : "MOD_INTERFAZ", "brokerurl" : "sample-url.com", "image" : "https://noticias.caracoltv.com/sites/default/files/250116_tarjeta-civica.jpg" }

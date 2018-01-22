@@ -6,9 +6,12 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { CompositeTestConnectionService } from './composite-test-connection.service';
 import { DevicesComponent } from './devices/devices.component';
-import { DeviceComponent } from './device/device.component';
-import { DeviceDetailComponent } from './device-detail/device-detail.component';
+import { DeviceComponent } from './devices/device/device.component';
+import { DeviceDetailComponent } from './devices/device-detail/device-detail.component';
 import { EventHoverDirective } from './event-hover.directive';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AboutComponent } from './about/about.component';
+import { RouterInfoService } from './router-info.service';
 
 
 @NgModule({
@@ -17,15 +20,17 @@ import { EventHoverDirective } from './event-hover.directive';
     DevicesComponent,
     DeviceComponent,
     DeviceDetailComponent,
-    EventHoverDirective
+    EventHoverDirective,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [CompositeTestConnectionService],
+  providers: [CompositeTestConnectionService, RouterInfoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

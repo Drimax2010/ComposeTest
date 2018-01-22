@@ -2,6 +2,7 @@ var restify = require("restify");
 
 // Retrieve
 var mongoClient = require("mongodb").MongoClient;
+var ObjectID = require('mongodb').ObjectID;
 var url = "mongodb://composite-test-db:27017";
 var db;
 
@@ -14,29 +15,16 @@ mongoClient.connect(url, function(err, database) {
   var device = this.db.collection("Device");
   device.count(function(err, count) {
     console.log("registros actuales: "+count)
-    /*
-    if (count <= 0) {
-      this.db.createCollection("chatRoom", function(err, res) {
-        if (err) throw err;
-        for (var i = 1, len = 10; i < len; i++) {
-          console.log("crea registros")
-          var defaultChatRoom = { id: i, name: "sample " + i };
-          chatRoom.insertOne(defaultChatRoom, function(err, res) {
-            if (err) throw err;
-          });
-        }
-      });
-    }
-    */
+    
   });
 });
 
-function respond(req, res, next) {
+function getInfoResp(req, res, next) {
   global.db
     .collection("Device")
     .find({})
     .toArray(function(err, result) {
-      console.log("Se envia respuesta");
+      console.log("Se envia respuesta "+ result);
       // Website you wish to allow to connect
       res.setHeader("Access-Control-Allow-Origin", "*");
       // Request methods you wish to allow
@@ -52,9 +40,32 @@ function respond(req, res, next) {
     });
 }
 
+function getDeviceResp(req, res, next) {
+  console.log("Se consulta con el idd "+ req.params.id);
+  global.db
+    .collection("Device")
+    .findOne({_id: new ObjectID.createFromHexString(req.params.id)},function(err, result) {
+      console.log("Se envia respuesta "+ result);
+      // Website you wish to allow to connect
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      // Request methods you wish to allow
+      res.setHeader("Access-Control-Allow-Methods", "GET");
+      // Request headersinx", " you wish to allow
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "X-Requested-With,content-type"
+      );
+      res.send(result);
+
+      next();
+    });
+}
+
+
 var server = restify.createServer();
 
-server.get("/get-info", respond);
+server.get("/get-info", getInfoResp);
+server.get("/get-device/:id",getDeviceResp)
 server.listen(3100, function() {
   console.log("%s listening at %s", server.name, server.url);
 });

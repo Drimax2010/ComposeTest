@@ -1,0 +1,70 @@
+<h1 style="text-align: center; color: #525252">
+  About us
+</h1>
+<p>
+  {{pOne}}
+</p>
+<p>
+  {{pTwo}}
+</p>
+{{pThree}}
+<p>
+  {{pFour}}
+</p>
+<p>
+  {{pFive}}
+</p>
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2 style="color: #525252">Mision</h2>
+      </mat-panel-title>
+      <mat-panel-description>
+        <h3>Our mision is</h3>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-grid-list cols="4" rowHeight="100px">
+      <mat-grid-tile [colspan]="3" [rowspan]="2">
+          <p>
+              {{pOne}}
+            </p>
+            <p>
+              {{pTwo}}
+            </p>
+
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="3">
+        <img src="https://udemy-images.udemy.com/course/750x422/399228_a3db_6.jpg">
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2 style="color: #525252">Vision</h2>
+      </mat-panel-title>
+      <mat-panel-description>
+        <h3>Our vision is</h3>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-grid-list cols="4" rowHeight="100px">
+      <mat-grid-tile [colspan]="3" [rowspan]="2">
+          <p>
+              {{pOne}}
+            </p>
+            <p>
+              {{pTwo}}
+            </p>
+
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="3">
+        <img src="https://d2eip9sf3oo6c2.cloudfront.net/series/square_covers/000/000/033/thumb/egghead-angular-material-course-sq.png">
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-expansion-panel>
+
+</mat-accordion>

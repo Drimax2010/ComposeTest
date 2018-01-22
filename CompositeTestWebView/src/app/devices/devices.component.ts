@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CompositeTestConnectionService } from '../composite-test-connection.service';
-import { Device } from '../Device';
+import { Device } from '../devices/Device';
+import {Router} from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-devices',
@@ -10,21 +12,24 @@ import { Device } from '../Device';
 export class DevicesComponent implements OnInit {
   selectedDevice: Device;
   deviceList = [];
+  dataSource = new MatTableDataSource();
+  displayedColumns = ['id', 'name', 'type', 'desc'];
 
   constructor(
-    public compositeTestConnectionService: CompositeTestConnectionService
+    public compositeTestConnectionService: CompositeTestConnectionService,
+    private router: Router
   ) {
-    compositeTestConnectionService.getDeviceList().subscribe(
-      (devices) => {
-        this.deviceList = devices;
-      }
-    );
-  }
-  onSelectedDevice($event) {
-    this.selectedDevice = $event;
   }
 
   ngOnInit() {
+    this.compositeTestConnectionService.getDeviceList().subscribe(
+      (devices) => {
+        this.dataSource =  new MatTableDataSource(devices);
+      }
+    );
   }
 
+  selectedRow(row: Device) {
+    this.router.navigate(['/device/', row._id]);
+  }
 }
