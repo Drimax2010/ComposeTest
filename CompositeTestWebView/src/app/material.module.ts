@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatTableModule, MatFormFieldModule, MatToolbarModule, MatCardModule
   , MatGridListModule, MatIconModule, MatExpansionModule } from '@angular/material';
 
+  const MODULES = [MatButtonModule, MatTableModule, MatFormFieldModule, MatToolbarModule, MatCardModule, MatGridListModule,
+    MatIconModule, MatExpansionModule];
+
 @NgModule({
-  imports: [MatButtonModule, MatTableModule, MatFormFieldModule, MatToolbarModule, MatCardModule, MatGridListModule,
-    MatIconModule, MatExpansionModule],
-  exports: [MatButtonModule, MatTableModule , MatFormFieldModule, MatToolbarModule, MatCardModule, MatGridListModule,
-    MatIconModule, MatExpansionModule],
+  imports: MODULES,
+  exports: MODULES,
 })
 export class MaterialModule { }

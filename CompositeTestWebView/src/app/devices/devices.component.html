@@ -25,6 +25,6 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectedRow(row)" appEventHover hoverColor="#CFCFCF"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/device/', row._id]" appEventHover hoverColor="#CFCFCF"></mat-row>
   </mat-table>
 </div>
