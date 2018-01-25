@@ -42,14 +42,14 @@
         <tr>
           <td>
             <mat-form-field style="width: 100%">
-              <input matInput placeholder="Name" [(ngModel)]="newDevice.name" formControlName="name" name="name">
+              <input matInput #name placeholder="Name" [(ngModel)]="newDevice.name" formControlName="name" name="name">
               <mat-error *ngIf="createDeviceFormGroup.hasError('required', 'name')">
                 Name is <strong>required</strong>
               </mat-error>
               <mat-error *ngIf="createDeviceFormGroup.hasError('minlength', 'name')">
                 Name require min 3 characters
               </mat-error>
-              <mat-error *ngIf="createDeviceFormGroup.hasError('minlength', 'name')">
+              <mat-error *ngIf="createDeviceFormGroup.hasError('maxlength', 'name')">
                 Name only can have max 50 characters
               </mat-error>
               <mat-error *ngIf="createDeviceFormGroup.hasError('pattern', 'name')">
@@ -78,8 +78,12 @@
           <td>
             <mat-form-field style="width: 100%">
               <input matInput placeholder="Broker url" [(ngModel)]="newDevice.brokerurl" formControlName="brokerUrl" name="brokerUrl">
+              <span matPrefix>https://</span>
               <mat-error *ngIf="createDeviceFormGroup.hasError('required', 'brokerUrl')">
-                Borker Url Type is <strong>required</strong>
+                Broker Url Type is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="createDeviceFormGroup.hasError('urlValidator', 'brokerUrl')">
+                Invalid format
               </mat-error>
             </mat-form-field>
           </td>
@@ -99,9 +103,9 @@
         </tr>
       </table>
       <mat-form-field style="width: 100%">
-        <textarea matInput placeholder="Description" [(ngModel)]="newDevice.desc" formControlName="Description" name="desc"></textarea>
+        <textarea matInput #description placeholder="Description" [(ngModel)]="newDevice.desc" formControlName="Description" name="desc"></textarea>
       </mat-form-field>
-
+      <mat-hint align="end">{{description.value?.length || 0}}/150</mat-hint>
       <button mat-raised-button type="submit"  [disabled]="!createDeviceFormGroup.valid" color="primary">Create</button>
 
 

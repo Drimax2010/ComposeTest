@@ -5,18 +5,20 @@ import { Router } from '@angular/router';
 import { MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import { DeviceType } from './DeviceType';
 import { CapType } from './CapType';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 import { CreateDeviceConfirmDialogComponent } from './dialogs/create-device-confirm-dialog/create-device-confirm-dialog.component';
 import { MatSnackBar } from '@angular/material';
+import {  } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.css']
 })
+
 export class DevicesComponent implements OnInit {
-  selectedDevice: Device;
+  selectedDevice: Device = new Device(undefined, '', '', '', '', '', '');
   newDevice: Device;
   deviceList = [];
   dataSource = new MatTableDataSource();
@@ -39,7 +41,7 @@ export class DevicesComponent implements OnInit {
     this.createDeviceFormGroup = formBuilder.group({
       'name' : [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
       'type' : [null, Validators.compose([Validators.required])],
-      'brokerUrl' : [null, Validators.compose([Validators.required])],
+      'brokerUrl' : [null, Validators.compose([Validators.required, urlValidator()])],
       'capType' : [null, Validators.compose([Validators.required])],
       'Description' : [null, Validators.compose([Validators.maxLength(500)])],
     });
@@ -85,6 +87,7 @@ export class DevicesComponent implements OnInit {
                   this.snackBar.open('Device has ' + deviceCreated.name + ' been created', 'Close', {
                     duration: 2000,
                   });
+
                   this.dataSource.data.push(deviceCreated);
                   this.dataSource._updateChangeSubscription();
                 }
@@ -93,4 +96,15 @@ export class DevicesComponent implements OnInit {
           }
         });
   }
+}
+
+export function urlValidator(): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} => {
+    if (control.value) {
+      const validationUrlString = '.com';
+      const forbidden = !control.value.includes(validationUrlString);
+      return forbidden ? {'urlValidator': {value: control.value}} : null;
+    }
+    return null;
+  };
 }
