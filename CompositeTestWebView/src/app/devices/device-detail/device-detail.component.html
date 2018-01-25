@@ -1,18 +1,74 @@
-<mat-card class="example-card" *ngIf="selectedDevice" style="margin-top: 20px; margin-left: 20px">
-    <mat-card-header>
-      <mat-card-title>Name: {{selectedDevice.name}}</mat-card-title>
-      <mat-card-subtitle>Type: {{selectedDevice.type}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="{{selectedDevice.image}}">
-    <mat-card-content>
-      <p>Desc: {{selectedDevice.desc}}</p>
-      <p>Cap. Type: {{selectedDevice.capType}}</p>
-      <p>Broker URL: {{selectedDevice.brokerurl}}</p>
-    </mat-card-content>
-    <mat-card-actions>
+<form class="device-form" style="margin: 20px" [formGroup]="updateDeviceFormGroup" (ngSubmit)="updateDevice()" *ngIf="selectedDevice">
+  <mat-form-field style="width: 100%">
+    <input matInput placeholder="Device ID" disabled value="{{selectedDevice._id}}">
+  </mat-form-field>
+  <table style="width: 100%" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Name" [(ngModel)]="selectedDevice.name" formControlName="name" name="name">
+          <mat-error *ngIf="updateDeviceFormGroup.hasError('required', 'name')">
+            Name is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="updateDeviceFormGroup.hasError('minlength', 'name')">
+            Name require min 3 characters
+          </mat-error>
+          <mat-error *ngIf="updateDeviceFormGroup.hasError('minlength', 'name')">
+            Name only can have max 50 characters
+          </mat-error>
+          <mat-error *ngIf="updateDeviceFormGroup.hasError('pattern', 'name')">
+            Invalid format
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 100%">
+          <mat-select placeholder="Type" [(ngModel)]="selectedDevice.type" name="type" formControlName="type">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let type of deviceTypes" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="updateDeviceFormGroup.hasError('required', 'type')">
+            Type is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
 
-      <button mat-button><mat-icon>delete</mat-icon></button>
-      <button mat-button><mat-icon>edit</mat-icon></button>
-      <button mat-raised-button color="primary" (click)="backView()">Back</button>
-    </mat-card-actions>
-  </mat-card>
+  <table style="width: 100%" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Broker url" [(ngModel)]="selectedDevice.brokerurl" formControlName="brokerUrl" name="brokerUrl">
+          <span matPrefix>https://</span>
+          <mat-error *ngIf="updateDeviceFormGroup.hasError('required', 'brokerUrl')">
+            Borker Url Type is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 100%">
+          <mat-select placeholder="Cap Type" [(ngModel)]="selectedDevice.capType" name="capType" formControlName="capType" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let capType of capTypes" [value]="capType">
+              {{capType}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="updateDeviceFormGroup.hasError('required', 'capType')">
+            Cap. Type is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <mat-form-field style="width: 100%">
+    <textarea matInput #description hintLabel="Max 150 characters" placeholder="Description" [(ngModel)]="selectedDevice.desc" maxlength="150" formControlName="Description" name="desc"></textarea>
+    <mat-hint align="end">{{description.value?.length || 0}}/150</mat-hint>
+  </mat-form-field>
+      <button mat-raised-button type="submit"  [disabled]="!updateDeviceFormGroup.valid" color="primary">Update</button>
+      <button mat-raised-button type="button" (click)="deleteDevice()" color="warn">delete</button>
+
+
+</form>

@@ -17,7 +17,7 @@ services:
     build: ../../scripts/
     depends_on:
       - composite-test-db
-  web-view:
-    build: ../../CompositeTestWebView/
-    ports:
-      - 8080:80 
+  ##web-view:
+    ##build: ../../CompositeTestWebView/
+    ##ports:
+     ## - 8080:80 

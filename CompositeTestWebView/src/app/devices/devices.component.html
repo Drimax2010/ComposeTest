@@ -12,19 +12,99 @@
       <mat-cell *matCellDef="let device"> {{device.name}} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="type">
       <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-      <mat-cell *matCellDef="let device"> {{device.name}} </mat-cell>
+      <mat-cell *matCellDef="let device"> {{device.type}} </mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="desc">
       <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
       <mat-cell *matCellDef="let device"> {{device.desc}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/device/', row._id]" appEventHover hoverColor="#CFCFCF"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/device/', row._id]" appEventHover hoverColor="#CFCFCF"></mat-row>
   </mat-table>
 </div>
+
+<mat-accordion>
+  <mat-expansion-panel style="margin-top: 20px !important" expanded="false" opened="false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3 style="color: #525252">Add new Device</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+        <h4>Click here to add new Device</h4>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form class="device-form" [formGroup]="createDeviceFormGroup" (ngSubmit)="createDevice()" style="margin: 20px">
+      <table style="width: 100%" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field style="width: 100%">
+              <input matInput placeholder="Name" [(ngModel)]="newDevice.name" formControlName="name" name="name">
+              <mat-error *ngIf="createDeviceFormGroup.hasError('required', 'name')">
+                Name is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="createDeviceFormGroup.hasError('minlength', 'name')">
+                Name require min 3 characters
+              </mat-error>
+              <mat-error *ngIf="createDeviceFormGroup.hasError('minlength', 'name')">
+                Name only can have max 50 characters
+              </mat-error>
+              <mat-error *ngIf="createDeviceFormGroup.hasError('pattern', 'name')">
+                Invalid format
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field style="width: 100%">
+              <mat-select placeholder="Type" [(ngModel)]="newDevice.type" name="type" formControlName="type">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let type of deviceTypes" [value]="type">
+                  {{type}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="createDeviceFormGroup.hasError('required', 'type')">
+                Type is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <table style="width: 100%" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field style="width: 100%">
+              <input matInput placeholder="Broker url" [(ngModel)]="newDevice.brokerurl" formControlName="brokerUrl" name="brokerUrl">
+              <mat-error *ngIf="createDeviceFormGroup.hasError('required', 'brokerUrl')">
+                Borker Url Type is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field style="width: 100%">
+              <mat-select placeholder="Cap Type" [(ngModel)]="newDevice.capType" name="capType" formControlName="capType" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let capType of capTypes" [value]="capType">
+                  {{capType}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="createDeviceFormGroup.hasError('required', 'capType')">
+                Cap. Type is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <mat-form-field style="width: 100%">
+        <textarea matInput placeholder="Description" [(ngModel)]="newDevice.desc" formControlName="Description" name="desc"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit"  [disabled]="!createDeviceFormGroup.valid" color="primary">Create</button>
+
+
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>

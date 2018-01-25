@@ -12,6 +12,10 @@ import { EventHoverDirective } from './event-hover.directive';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AboutComponent } from './about/about.component';
 import { RouterInfoService } from './router-info.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateDeviceConfirmDialogComponent } from './devices/dialogs/create-device-confirm-dialog/create-device-confirm-dialog.component';
+import { DeleteDeviceConfirmDialogComponent } from './devices/dialogs/delete-device-confirm-dialog/delete-device-confirm-dialog.component';
+import { UpdateDeviceConfirmDialogComponent } from './devices/dialogs/update-device-confirm-dialog/update-device-confirm-dialog.component';
 
 
 @NgModule({
@@ -21,15 +25,24 @@ import { RouterInfoService } from './router-info.service';
     DeviceComponent,
     DeviceDetailComponent,
     EventHoverDirective,
-    AboutComponent
+    AboutComponent,
+    CreateDeviceConfirmDialogComponent,
+    DeleteDeviceConfirmDialogComponent,
+    UpdateDeviceConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
     AppRoutingModule
   ],
+  entryComponents: [
+    CreateDeviceConfirmDialogComponent,
+    DeleteDeviceConfirmDialogComponent,
+    UpdateDeviceConfirmDialogComponent],
   providers: [CompositeTestConnectionService, RouterInfoService],
   bootstrap: [AppComponent]
 })

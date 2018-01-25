@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete Device</h1>
+<mat-dialog-content>
+  <p>Are you sure you want to delete device?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="deleteDevice(true)">Ok</button>
+  <button mat-raised-button mat-dialog-close color="warn" (click)="deleteDevice(false)">Cancel</button>
+</mat-dialog-actions>
